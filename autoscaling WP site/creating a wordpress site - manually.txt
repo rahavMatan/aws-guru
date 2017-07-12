@@ -1,0 +1,57 @@
+(optional - create a route 53 dns)
+ created a role for S3 
+ created 2 security groups for webAccess and RDS access
+ created EBS 
+ created 2 buckets. 1 for code and 1 for media assets.
+ created a cloudfront instance
+ created RDS instance
+(optional-point the route53 dns to the ELB instance)
+setting up EC2 instances 
+ELB -> target groups ->targets ->add the Ec2 server instance
+enter the ELB dns and configure the Wordpress site
+in the db url paste in the RDS endpoint
+aws s3 cp --recursive /var/www/html/wp-content/uploads s3://acg-assets-2 (this copies the uploads dir to our assets bucket)
+aws s3 sync --delete /var/www/html/wp-content/uploads s3://acg-assets-2 --dryrun 
+this syncs between the folder and the bucket. dry run is for runnig the command without actually changing the files. we will remove dryrun and run the command again. this does not execute automatically.
+
+wget https://s3-eu-west-1.amazonaws.com/acloudguru-wp/htaccess   -downloads a file that configures the use of the cloudfront instead of the bucket dns.
+mv htaccess .htaccess
+nano .htaccess -> change to my cloudfront dns
+save
+cd /etc -> nano crontab   -crontab is for scheduling tasks.
+add:
+ */5 * * * * root aws s3 sync --delete /var/www/html/wp-content/uploads <our assets bucket>
+ */5 * * * * root aws s3 sync --delete /var/www/html  <our code bucket>
+these tasks will sync the folders with the buckets every 5 min.
+save
+
+--setting up images, 1 for writing 1 for reading.
+load balancers -> target groups -> edit -> remove the ec2 instance -> save
+create a new ELB  for writing -> add the ec2 instance 
+Ec2 -> stop the ec2 instance 
+(if using route53) route53 -> hosted zones -> create record set ->name:write.acouldguru.com, alias: yes, alias target: the new ELB
+go back to EC2 -> make an image of the stopped EC2 instance
+start the stopped EC2 instance
+
+
+--------------------
+
+script for EC2 web server:
+sudo su
+yum update -y
+yum install php php-mysql httpd stress -y
+cd /etc/httpd
+cd conf
+cp httpd.conf httpdconfbackup.conf
+nano httpd.conf ->  edit AllowOverride All -> ctrl X yes
+cd /var/www/html
+nano healthy.html -> some text
+wget https://wordpress.org/latest.tar.gz
+tar -xzf latest.tar.gz
+cp -r wordpress/*  /var/www/html/
+rm -rf wordpress
+rm -rf latest.tar.gz
+chmod -R 755 wp-content
+chown -R apache.apache wp-content
+service httpd start
+chkconfig httpd on

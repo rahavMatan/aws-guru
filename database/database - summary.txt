@@ -1,0 +1,136 @@
+relational database (rds): - a traditional table based db. used mostly for (OLTP) online transaction processingg  
+SQL
+Oracle
+mySQL
+PostgreSQL
+Aurora (aws)
+MariaDB
+-------------------
+non-relational: document based.
+mongo 
+dynamoDB
+
+in non-rds: collection = table
+	   document = row
+	   key value pair = fields
+------------
+data warehousing: used to pull in large and compex datasets. usually used by managment to do queries on data.
+RedShift
+---------------
+OLTP (online transaction processing) vs OLAP(online analytics processing)
+an example of  OLTP is querying the db for a simple entry/entries. just fetching/writing. (a users details out of the users table)
+suitable for  RDS
+
+an example of OLAP is fetching multiple entries and doing calculations on them.
+(sum of items sold in a region, sum of items sold in another region, unit cost of item in each region, sale price of each item, sale price minus unit cost...)
+this is more suitable for a datawarehouse becuase datawarehous uses differrent architechture and infrastructure
+--------------------
+ElasticCache: improve the perfomance of web applications by chaching.
+Memchached
+Redis
+example: a repeated query for 'today's top 10 sales', the results can be stored in elasticCache for faster response and less load on the db
+---------------
+DMS - db migration services.
+allows to migrate the production db to aws. aws will handle all the complexities involved.
+--------------
+
+** when creating a DMS don't forget to set an appropriate security group that allows connecting to the DB. allowing port 3306 in the RDS security group 
+DMS instances ->configuration details -> security groups -> edit -> inbound -> Source -> [security group name]
+----------------------
+backups:
+automated - recover to a specific point in time. backed-up automatically every 1 - 35 days (retention period). will also store transaction logs throughout the day. 
+when doing a recovery aws will use the latest daily backup and aplly the transaction logs of that day. thus recovering down to a second within the retention period. enabled by default.
+back up is stored in S3. during the backup IO may be suspended or experiance latency, so choose an appropriate window
+
+snapshots - done manually. are stored even after the original RDS is deleted. (the automated backups will delete)
+
+when doing a restore the restored version will be a new RDS instance.
+---------------
+encryption:
+at rest is supportd for mySQL, Oracle, SQL, PostgreSQL, MariaDB. using key managment service (KMS).
+if the DB is encrypted, so are the snapshots and backups and the data.
+
+to encrypt an existing DB you need to create a new encrypted DB and move the data to the encrypted one.
+-------------------
+Multi-AZ: have an exact copy of the db in another AZ. good for cases of db maintanance, db failure, AZ failure.
+it is not for increased performance. it is for the RDS databases.
+--------------
+read replica:
+when having heavy read work loads- create a READ ONLY replica using async replication from the primary RDS, can even have replicas of replicas.
+supports MYSQL, PostrgreSQL, MariaDB
+used for scaling. not disaster recovery
+must have auto backup turned on
+can have up to 5 replicas of each db
+each replica has it own DNS endpont
+read replicas don't have Multi-AZ
+can creat read replicas of Multi-AZ source db
+replicas can be promoted to be their own db. this breakes replication
+size can be bigger the original db
+
+-----------------
+dynamoDB offers scaling without any downtime. to scale up you don't need to copy the db into a bigger db.
+stored on ssd
+spread across 3 different data centers 
+eventual consistent reads - data is synced within a second (best read performance). default.
+
+strongly consitent reads - return a result the reflects all succesful writes prior to the read. == the most updated data
+
+pricing:
+provisioned throughput capacity
+-write throughput 0.0065$ per hour for every 10 WCUs (write capacity unit)
+-read throughput 0.0065$ per hour for every 50 RCUs (read capacity unit) 
+
+0.25$ per gig per month
+
+----------------------
+redshift - offers cloud data warehouse for tenth of the cost. very fast and cheap
+configuration:
+single node - 160gb
+multi-node: -leader node (manages client connections and recieve queries)
+	   -compute node(store data and perform queries). can have up to 128 compute nodes
+
+columnar data storage - by using this methode the system requires less IO and greater performance.
+
+advanced compression - columnar data stores can be more compresed because similar data is stored sequentialy on disk. 
+doesn't require indexes - so uses less space on disk.
+aws selects the most appropriate compression scheme.
+
+massive parallel processing (mpp) - redshift distributes data and query loads across al nodes. this enables fast query performance as warehouse grows
+
+price:
+compute node hours- charged for compute node use only hourly.
+backup-
+data trasfer-
+
+secrutiy:
+everything is encrypted, and redshift takes care of key managment by default
+
+availability - not multi AZ.
+
+can restore snapshots to new AZ in case needed
+
+----------
+elasticache - in-memory cache 
+a good choice if the db is read heavey and not often changed.
+memechached - widley adopted memory object caching system. popular tools will work.
+
+redis - open source in memory key-value store. Elasticache supports master/slave replication and multi AZ.
+------------------
+exmaple scenario:
+a particular db is under a lot of stress/load.
+Elastic cache is a good solution. 
+but redshift might also be used if the db owner performs a lot of OLAP transcations.
+
+--------------------
+Aurora - aws own mySQL compatible. better performance the mySql and one tenth of the price.
+starts with 10gb, scales in 10gb up to 64tb.(storage autoscaling)
+sacles fast, but there is downtime.
+2 copies of data in each AZ, minimum of 3 AZ. == 6 copies
+data blocks are continously scanned for errors and repaired automaticaly.
+
+replica types:
+aurora replicas (up to 15). in case of failure it will automtically trasfer to the replica
+mysql read replicas (up to 5)
+
+use the cluster endpoint to connect (not the instance endpoint), so that aws will direct the treaffic to the operating db incase of a failure.
+----------------------

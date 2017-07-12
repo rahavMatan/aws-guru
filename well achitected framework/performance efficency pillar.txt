@@ -1,0 +1,58 @@
+focuses on how to use resources efficiently to meet requirements, and maintainas demand changes and thechnology evolves.
+
+design pricipals:
+-democratize advanced technologies - use of newer srvices like nosql, Machine learning etc
+-go global in minutes
+-use serverless 
+-experiment more often
+
+defenition:
+
+compute:
+compute best practices: choose the right type of server / serverless
+compute question:
+-how do you select the appropriate instance for your system?
+-how do you ensure that you continue to have the most appropriate instace type as new features are released?
+-how do you monitor your instances after they launch?
+-how do you ensure the quantity of instances matches demand?
+---------------
+
+storage
+storage best practices:
+access methods-block /file/object
+pattern of access - random / sequence
+throughput required
+access frequency
+update frequency
+availability 
+durability
+
+storage best practices:
+AWS storage is virtualized.
+S3 has 11 9's durability.
+cross region replication.
+EBS mediums SSd,magnetic,PIOPS
+move volumes between different storage types
+
+storage questions:
+-how do you select the best storage solution?
+-how do you ensure that you continue to use the best storage solution?
+-how do you monitor storage is performing as expected?
+-how do you ensure capacity and IO demand is met?
+
+----------------
+
+DB
+
+DB best practices: do you need DB consistency? high avaiability? noSQL? 
+
+
+
+----------------
+space-time tradeoff
+best practices: using RDS read replicas, direct connect, CDN, elasticache
+questions: 
+-how do you select the appropriate proximity and caching solutions ?
+-how do you monitor performace?
+
+key service: autoscaling, storage options, DB  options, space-time options

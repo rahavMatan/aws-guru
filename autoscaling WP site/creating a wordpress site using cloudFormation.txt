@@ -1,0 +1,15 @@
+1. cloud formation -> create stack -> from template -> wordpress blog
+
+2. SSH location keep 0.0.0.0/0
+
+3. select a few subnets
+
+4. takes about 10 mins to create
+
+5. when done,  output -> the link to the site
+
+6. it will still not load. go to EC2->security groups -> stackname SG ->http source == <default security group>. change that to 0.0.0.0/0
+
+7. still won't load. go to load balancer -> secuirty groups. it's in the defalt. change that to the stack name secuirty group
+
+8. done.

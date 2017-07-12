@@ -1,0 +1,78 @@
+used for file/object based.
+
+up to 5tb file size
+
+unlimited storage
+
+bucket == folder with universal namesapce
+
+has a default url of https://s3-<zone>.amazonaws.com/...
+
+read after write consistency == u can read right after writing a new object. overwriting an object and deletes can take time to propagate.
+
+
+the different s3 classes - s3, IA, reduced redundancy storage (rrs) ,glacier
+
+each object has: key, value, version id, metadata, access control list
+
+not suitable for OS.
+
+versioning - good for backups (watermark deletes). can't be turned off, only suspended.
+
+lifecycle managment - can also be applied to versions.
+
+----------------
+
+edge location - seperate from AZ / regions
+
+origin -  can be S3 bucket, EC2, ELASTIC LOAD BALANCER OR ROUTE 53
+
+distribution - the name of the cdn. is a group of edge locations.
+	web / rtmp (media)
+edge location can also write files to origin
+
+objects are cahced for TTL
+
+clearing cache objects costs a charge.
+
+------------------
+objects / buckets a are default private.
+access to buckets using bucket policies /access control list
+buckets can log all activity. can also log into buckets.
+
+encryption - 
+in transit: ssl/tls
+
+at rest: 
+server side encryption:
+ S3 managed keys - SSE-S3. uniqe key
+aws key managment service (kms) SSE-KMS.
+server side encryption with customer provided keys - SSE-C
+client side encryption
+
+------------------
+file gateway - for flat files on S3
+Volume gateway:
+	stored volumes
+	cached volumes
+gateway virtual tapes library
+
+-----------------------
+snowball / snowball edge / snowmobile
+
+used to be an import/export service
+
+------------
+tranfer acceleration. speed up transfer to S3
+
+-----------
+host static websites. very cheap and scales automaticaly 
+
+------------
+http code 200 on succesfull S3 upload
+multipart upload is faster
+
+
+	
+
+

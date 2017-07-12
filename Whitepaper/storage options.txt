@@ -1,0 +1,24 @@
+S3
+glacier
+EBS
+EC2 instance - temporary blocak storage (ephemeral)
+import/export - large volume data transfer --- don't forget SNOWBALL
+
+storage gateway - integrates on-premise IT with cloud storage.
+cloudfront - cdn
+SQS
+RDS
+dynamoDB
+Elasticache
+Redshift
+db in EC2 instances - self managed db on an EC2 instance
+
+you should know for each:
+ideal usage
+performance
+durabily and availability
+cost model
+scaleability and elasticity
+interfaces
+anti-patter (not suitable for)
+

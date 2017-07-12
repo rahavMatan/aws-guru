@@ -1,0 +1,104 @@
+a set of questions you can use to evaluate how well your achitecture is aligned with AWS best practices
+
+5 pillars:
+---------------------------
+1. Security:
+design principal 
+- apply security at all layers.
+-enable traceability
+-automate response to security events
+-focus on securing your system (customer responsibilty vs AWS responsibility)
+-automate security best practices (example: harden the OS of an AMI before deploying)
+
+Security have 4 areas:
+data protection,
+privilege managment ,
+infrastructure protection,
+detective controls
+
+data protection defenition:
+data protection - basic data classification. organise and classify data into segments such as public, members only, certain members etc. implemet a least priviliged accesss system so people can only access what they need. and encrypt everything at rest and in transit.
+
+data protection best practices:
+ - customers maintain full control of their data.
+- AWS offers encryption and key managment
+- detailed logging 
+- versioning can be part of a larger data lifecycle and protet against overwrites, deletes etc
+- AWS never initiates data movement between regions
+
+data protection questions:
+-how are you encrypting and protecting data at rest?
+- how are you encrypting and protecting data in transit (SSL)
+
+priviliged managment best practices: ensure that only authorized and authenticated users access your rousurces and in the manner intended.
+-Access control lists
+- role based access control
+-password managment (such as rotation policies)
+ 
+priviliged managment questions:
+-how are you protecting access to and use of AWS root acount credentials?
+-how are you definig roles and responsebilities of system users to control human access to AWS managment console and Api?
+-how are you limiting autoamted access(such from apps or scripts) to resources?
+-how are you managing keys and credentials
+
+infrastructure protection best practices: how you protect your data center outside of AWS.
+-how to protect your VPC
+
+infrastructure protection question:
+-how are you enforcing network and host level boundry protection? 
+-how are you enforcng AWS service level protection?
+-how are you protecting the integrity of the OS in instances? (antivirus etc..)
+
+detective control best practices:
+to detect a security breach use:
+cloudtrail
+cloudwatch
+AWS config
+S3
+Glacier
+ detective contorol questions:
+-how are you capturing AWS logs?
+
+
+
+Security AWS services:
+-encryption using ELB,EBS,S3,RDS
+-proviliages: IAM, MFA
+-infrastructure: VPC
+detective controls: ckoudtrial, config cloudwatch
+
+Security exam tips:
+-the 4 areas 
+-the questions 
+
+
+
+
+
+-----------------
+
+Reliabilty
+
+Perfiormace efficiency
+
+Cost optimisitaion
+
+Operational excellence
+
+
+
+for each pillar:
+design principal
+defenition
+best practices
+key AWS services
+
+-------------------
+
+general design principals:
+stop guessing your capacity needs
+test system at production scale
+automate to make experimentaion easier
+allow for evolutionary achhitectures
+data driven architucures 
+improve thourgh game day (simulate a scenario like black friday)

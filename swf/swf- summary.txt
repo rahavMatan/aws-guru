@@ -1,0 +1,20 @@
+swf - simple workflow service. allows coordination of tasks.
+ 
+tasks are invocations of steps in an app. not neccerasly performed by EC2 instances, but can also be human performed tasks 
+
+has a retention period of up to a year.
+
+*if it's less then 14 days it's better to use sws.
+
+task oriented instead of message oriented.
+
+tasks are delivered only once.
+
+swf keeps track of all tasks en events. with sqs you need to implement application level tracking.
+--------------------
+swf actors :
+workflow starters - an ap that can initiate a workflow
+
+deciders - controls the flow of tasks. if a task finished or failed the deciders decides what to do next.
+
+activity workers - carry out the task (computer or human)

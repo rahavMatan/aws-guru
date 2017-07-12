@@ -1,0 +1,27 @@
+shared respinsibilty model - reduce cusotmers operational burden. the customer is responsible for OS updates and patches and to configure the SG firewall
+
+Risk - once every 6 months (bi-annualy) AWS manages and implements risk assesments.
+
+AWS scans reguraly all internt facing service endpoints for vulenrability (not customer instances).
+external assesments are performed by indipendant security firms
+
+customers can request persmision to conduct their own security scans.
+
+Compliance:
+soc1 / ssae 16 / isae 3402 (foemerly sas 70 type 2)
+soc2
+soc3
+
+fisma, diacap, deframp
+
+pci dss level 1 - this is for credit card payments. you don't get this automatically.
+
+iso 27001
+iso 9001
+itar
+fibs 140-2
+
+industry specific standards:
+Hippa
+cloud security alliance (CSA)
+motion picture assiciation of america (MPAA)

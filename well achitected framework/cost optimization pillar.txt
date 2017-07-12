@@ -1,0 +1,21 @@
+pay the lowest amount possible while still achieving your buisness objetives.
+
+design principals:
+-transparent attribute expenditure - locate ROI
+-use managed services to reduce cost of ownership
+-trade capital expense for operating expanse- paying only for used resources
+-benefit from economies of scale. (Amazon scale operation)
+-stop spendig on data center operations
+
+defenition:
+matched supply and demand - don't over / under provision.
+ 
+-------
+
+cost effective resource - example use a more expensive instance for less time then a weaker instance for a longer time
+
+-------------
+awareness - no need to get quotes on physical servers. 
+being aware which team is spending. use alerts. ACL can also help in this
+
+optimizing over time. sign up to blogs and use trusted advisors

@@ -1,0 +1,46 @@
+covers the ability of a system to recover from and outage/distruption as well as the ability to dynamically acquire reousrces to meet demand
+
+design principals:
+-test your recovery procedure
+-auto recover from failure
+-scale horizontally - replace big resources with other smaller resources. distributing so no common point of failure.
+-stop guessing capacity
+
+
+foundations: before archtecting a system sure you have the foundations
+
+foundations questions: 
+-how are you managing your AWS service limits for your account?
+-how are you plannig your network topology?
+- do you have an esclation plan to deal with technichal issues?
+
+
+change managment best practices: be aware of how change affects your system. plan proactivly around it.
+use monitoring to automate response to changes.
+
+change managment questions:
+-how does your system adapt to change in demand?
+-how are you monitoring AWS resources?
+-how are you executing change managment?
+
+failure managment best practices:
+-always architect our system with the assumption that failure will accure, and how to respond.
+
+faliure managment questions:
+-how are you backing up your data?
+- how does your system withstand a component faiure?
+- how are you plannig for recovery?
+
+ AWS services:
+foundation: IAM, VPC
+
+change managment: AWS cloudtrail
+
+failure managment: cloud formation, multi AZ
+
+exam tips:
+reliability: foundation, change mangment, failure anagment, related questions.
+
+
+
+

@@ -1,0 +1,50 @@
+shared security model - aws is responsible for securing the infrastructure, you're respinsible for anything you put on the cloud or connect to the cloud
+
+AWS is responsible for the security configuration of its MANAGED SERVICES. (dynamoDB, RDS, Redshift, Elastic map reduce, Workspaces). they are only incharge of the configurations.
+
+IAAS such as EC2 VPC S3 - under user control and require security configs and managment tasks.
+
+AWS is responsible for patching , antivirus etc, however the user is responsible for accout managment and user access. MFA, user/api logging , SSL/TLS , cloudtrail  are recomended.  
+
+Storage decommissioning -  follow the 'national industrial security program' and 'guidelines for media sanitization' to prevent customer data from being exposed.
+magnetic storage devices are degaussed (deleted) and physically destroyed.
+
+trasmission protection - users can cunnect using http/https with SSL (secure sockets layer)
+private VPC are another way to secure networks. you can use IPsec to provide an encrypted tunnel between your VPC and your datacenter
+
+amazon corporate segregation - amazon.com and AWS are segregated networks.
+
+monitoring and protection:  
+DDsos, 
+MITM (man in the middle), 
+ip spoofing,  - instances are not allowed to send traffic with a source ip or mac adress other that its own.
+port scanning - , 
+packet sniffing by other tennants
+
+-you must request a vulunerability scan in advance. the scan are allowed only on your instances.
+
+credentials - passwords, MFA, Acess leys, key pairs, x.509 cert 
+
+trusted advisor - inspect your environment and makes recomandations to save moeny, improve perfomrnace, and security gaps.
+common gaps: leaving ports open, not creating IAM accounts for internal users, public access to S3, not using cloudtrail, not using MFA on root AWS account.
+
+instance isolation - Xen hypervisor isolates different instances  runnig on the same machine. all packets pass though the firewall (physical network and the instance's virtual interface).
+every instance can be treat as if on a seperate host somewhere on the internet.
+phisical RAM is seperated using similar mechanisms
+
+customer instances have no access to raw disk, but instaed to virtualized disks. every block of storage is reset  after usage.
+memory allocated to guests is set to zero (scrubbed) by the hypervisor and not returned to the pool until it's scrubbed.
+
+guest operating system - virtual instances are comletely controled by you. AWS does not have any access to your instances.
+
+firewall - EC2 provides complete firewall solution. default deny-all mode. you must explicitly open the ports needed for inbound traffic
+
+guest OS - encryption of data is a good practice. AWS provides encryption abilities
+
+ELB - ssl termination is supported. allows you to indentify to originating IP adress wether using https or TCP load balancing. this way the decryption happens at the ELB layer instaed of the server.
+
+direct connect - bypass internt ISP (internet service providers). the dedicated connection can be partitioned into virtual interfaces. this allows you to access public resources using public IP, and private resources within a VPC using private ip on - using the same connection, but maintaining separation.
+
+
+
+

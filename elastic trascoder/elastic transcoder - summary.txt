@@ -1,0 +1,5 @@
+Elastic trascoder - media trascoding in the cloud. convert media files to different formats that will play on smartphones, tablets etc..
+
+provides presets so no need to guess which setting is best for a specific device.
+
+pay based on the minutes used and resolution

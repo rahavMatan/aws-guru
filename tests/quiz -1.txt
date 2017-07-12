@@ -1,0 +1,239 @@
+overview
+----------------------------
+-With the Resource Groups tool, you use a single page to view and manage your resources.
+
+-Proactive Cyclic Scaling allows you to scale during the desired time window.
+
+-Amazon Snowball has replaced the older AWS Import/Export Disk service. including Redshift import
+
+-Availability Zone names are unique per account and do not represent a specific set of physical resources.
+
+A third party security company would like to conduct a penetration test on your AWS estate. Would this be allowed by AWS?
+-You need to request permission from AWS first before conducting a penetration test.
+
+What does an AWS Region consist of?
+-an independant collection of AWS computing resources in a defined geography
+
+You need a configuration management service that enables your system administrators to configure and operate your web applications using Chef. Which AWS service would best suit your needs?
+-opsworks
+
+The AWS platform consists of how many regions currently?
+-14
+
+What is the maximum response time for a Business Level Premium Support Case?
+-1 hour
+
+I can enable multifactor authentication by using
+-IAM
+
+Which of the following services allows you root access (ie you can login using SSH)?
+-elastic map reduce
+
+You are a systems administrator and you need to monitor the health of your production environment. You decide to do this using Cloud Watch, however you notice that you cannot see the health of every important metric in the default dash board. Which of the following metrics do you need to design a custom cloud watch metric for, when monitoring the health of your EC2 instances?
+-memory usage
+
+Which of the following is not a responsibility of Amazon’s under the shared responsibility model?
+-level patching for EC2 is the customers responsibility under the shared responsibility model.
+
+IAM
+------------------------
+When trying to grant an amazon account access to S3 using access control lists what method of identification should you use to identify that account with?
+
+-The email address of the account or the canonical user ID
+
+
+A __________ is a document that provides a formal statement of one or more permissions.
+-policy
+
+Power User Access allows ________.
+-Access to all AWS services except for managment except for managment of groups and users within IAM
+
+You are a solutions architect working for a large engineering company who are moving their existing legacy hardware to AWS. You have configured their first AWS account and you have set up IAM. Your company will be primarily based out of West Germany, however they will have a small subsidiary operating out of South Korea and you will need an AWS environment configured there as well. Which of the following statements is true;
+-users and policy documents are applied globaly
+
+You are a security administrator working for a hotel chain. You have a new member of staff who has started as a systems administrator and they will need full access to the AWS console. You have created the user account and generated the access key id and the secret access key. You have moved this user into the group where the other administrators are and you have provided the new user with their secret access key and their access key id. However when they go to log in to the AWS console, they cannot sign in. What could be the cause of this?
+-The secret access key and access key ID cannot be used to login to the AWS Console. You will have to generate a password for your user.
+
+DNS
+--------------------
+-Route53 has a security feature that prevents internal DNS from being read by external sources. The work around is to create a EC2 hosted DNS instance that does zone transfers from the internal DNS, and allows itself to be queried by external servers.
+
+After establishing a Direct-Connect service between your VPC and their on-premise network, and confirming all the routing, firewalls, and authentication, you find that while you can resolve names against their DNS, the other company services is unable to resolve names against your DNS servers. Why might this be?
+-by design AWS DNS does not respond to requests originating  outside the VPC
+
+
+-----------------------
+
+S3
+---------------------
+-for all new AWS accounts there is a soft limit of 20 EC2's per region. you can submit  a limit increase form
+
+You are a solutions architect working for a biotech company who is pioneering research in immunotherapy. They have developed a new cancer treatment that may be able to cure up to 94% of cancers. They store their research data on S3, however recently an intern accidentally deleted some critical files. You've been asked to prevent this from happening in the future. What options below can prevent this?
+-The best answer is to enable S3 versioning on the bucket & enable MFA on the bucket.
+
+You are hosting a website in Ireland called aloud.guru and you decide to have a static DR site available on S3 in the event that your primary site would go down. Your bucket name is also called “acloudguru”. What would be the S3 URL of the static website?
+-if the bucket hosts static web page then the url will looks as follows -> https://acloudguru.s3-website-eu-west-1.amazonaws.com.  
+
+
+ Your company hosts large volumes of data and has about 250Tb of data on internal servers. They have decided to store this data on S3 due to the redundancy offered by it. The company currently has a telecoms line of 2Mbps connecting their head office to the internet. What method should they use to import this data on to S3 in the fastest manner possible.?
+-AWS Import/Export allows for the importation of large data sets, using external hard disks which are sent directly to amazon, therefore bypassing the internet.
+
+What is the availability on S3?
+-99.99% (durability is 11 9's)
+
+S3 has eventual consistency for which HTTP Methods?
+-overwrite puts and deletes
+
+You run a popular photo sharing website that is based off S3. You generate revenue from your website via paid for adverts, however you have discovered that other websites are linking directly to the images on your site, and not to the HTML pages that serve the content. This means that people are not seeing your adverts and every time a request is made to S3 to serve an image it is costing your business money. How could you resolve this issue?
+-You would be better to remove the ability for images to be served publicly to the site and then used signed URL's with expiry dates.
+-----------------------
+
+EC2
+-------------------------------------------
+You're building out a single-region application in us-west-2. However, disaster recovery is a strong consideration, and you need to build the application so that if us-west-2 becomes unavailable, you can fail-over to us-west-1. Your application relies exclusively on pre-built AMI's. In order to share those AMI's with the region you're using as a backup, which process would you follow?
+-copy te AMI's and apply launch permissions, user-defined tags,  Amazon S3 bucket permissions from the source AMI to the new AMI.
+
+You have been engaged by a company to design and lead a migration to an AWS environment. The team is concerned about the capabilities of the new environment, especially when it comes to avoiding bottlenecks. The design calls for about 20 instances (C3.2xLarge) pulling jobs/messages from SQS. Network traffic per instance is estimated to be around 500 Mbps at the beginning and end of each job. Which network configuration should you plan on deploying?
+-Whereever possible, use simple solutions such as spreading the load out rather than expensive high tech solutions.
+
+A client who is using EC2 believes that someone other than approved administrators is trying to gain access to her Linux web app instances, and she asks what sort of network access logging can be added to the system. Which of the following might you recommend?
+-You should make use of an OS level logging tools such as iptables and log events to CloudWatch or S3.
+
+- read about auto scaling in/out --> http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html
+
+You are putting together a wordpress site for a local charity and you are using a combination of Route53, Elastic Load Balancers, EC2 & RDS. You launch your EC2 instance, download wordpress and setup the configuration files connection string so that it can communicate to RDS. When you browse to your URL however, nothing happens. Which of the following could NOT be the cause of this.
+-you have locked port 22 (ssh) to your specific ip and therfore users can't access your site via http. (port 22 is not associated with http. therefore its is the WRONG answer)
+
+you decide to utilize EC2 running a MySQL database, rather than using RDS. You need to architect this EC2 instance to maximise your disk IO. Which of the following would give you the best disk performance?
+-add 2 additional PIOPS SSD volumesand create a RAID 0. install mySQL to this RAID 5 partition
+
+
+In regards to EC2 which of the following is not a customers responsibility under the shared responsibility model?
+-decomissioning and destruction of storage media
+
+You work for a cosmetic company which has their production website on AWS. The site itself is in a two-tier configuration with web servers in the front end and database servers at the back end. The site uses using Elastic Load Balancing and Auto Scaling. The databases maintain consistency by replicating changes to each other as and when they occur. This requires the databases to have extremely low latency. Your website needs to be highly redundant and must be designed so that if one availability zone goes offline and Auto Scaling cannot launch new instances in the remaining Availability Zones the site will not go offline. How can the current architecture be enhanced to ensure this?
+-In this scenario if you lost an availability zone, you would still have 2 other Availability Zones available each that is configured to handle 50% peak load per zone. 50% + 50% = 100%. deploy your site in 3 different AZ's and configure the auto scaling minimum to handle 50% of the peak load per zone
+
+It is possible to transfer a reserved instance from one Availability Zone to another.
+-true
+
+EBS Snapshots are backed up to S3 in what manner?
+-Snapshots are backed up to S3 incrementally.
+
+A placement group can be deployed across multiple Availability Zones.
+-false
+
+Placement Groups can be created across 2 or more Availability Zones.
+-false
+
+DB
+-----------------------------
+-DynamoDB allows for the storage of large text and binary objects, but there is a limit of 400 KB, name and value totaled.
+
+You are a consultant planning to deploy DynamoDB across three AZs. Your lead DBA is concerned about data consistency. Which of the following do you advise the lead DBA to do?
+-ask the develpomnet team to to code for strongly consistent reads
+
+Amazon's Redshift uses which block size for its columnar storage?
+-1mb / 1024kb
+
+You can select a specific Availability Zone in which to place your DynamoDB Table?
+-false
+
+How many copies of my data does RDS - Aurora store by default?
+-6 
+
+You can RDP or SSH in to an RDS instance to see what is going on with the operating system.
+-false
+
+Can I "force" a failover for any RDS instance that has Multi-AZ configured?
+-yes
+
+In RDS, changes to the backup window take effect
+-immediatly
+
+In RDS what is the maximum size for a Microsoft SQL Server DB Instance with SQL Server Express edition?
+-10Gb per Database
+
+
+Amazon RDS does not currently support increasing storage on a ____ Db instance
+-SQL server
+
+Automated backups are enabled by default for a new DB Instance?
+-True
+
+In RDS, what is the maximum value I can set for my backup retention period?
+-35 days
+
+What AWS DB platform is most suitable for OLTP?
+-RDS/Dynamo
+
+When replicating data from your primary RDS instance to your secondary RDS instance, what is the charge?
+-it's free
+
+When you add a rule to an RDS security group you do not need to specify a port number or protocol?
+-false
+
+If you are using Amazon RDS Provisioned IOPS storage with MySQL and Oracle database engines what is the maximum size RDS volume you can have by default?
+-6 tb
+
+In RDS when using multiple availability zones, can you use the secondary database as an independent read node?
+-Incorrect, you cannot do this.
+
+By default, the maximum provisioned IOPS capacity on an Oracle and MySQL RDS instance (using provisioned IOPS) is 30,000 IOPS.
+-true
+
+VPC
+------------------
+You successfully configure VPC Peering between VPC-A  and VPC-B. You then establish an IGW and a Direct-Connect connection in VPC-B. Can instances in VPC-A connect to your corporate office via the Direct-Connect service, and connect to the Internet via the IGW?
+-VPC peering does not support edge to edge routing
+
+-Once a VPC is set to Dedicated hosting, it is not possible to change the VPC or the instances to Default hosting. You must re-create the VPC.
+
+You work for a automotive company which is migrating their production environment in to AWS. The company has 4 separate segments, Dev, Test, UAT & Production. They require each segment to be logically isolated from each other. What VPC configuration should you recommend?
+- The best answer is to deploy a separate VPC for each segment, completely isolating that segment from the other segments.
+
+You work for a famous bakery who are deploying a hybrid cloud approach. Their legacy IBM AS400 servers will remain on premise within their own datacenter however they will need to be able to communicate to the AWS environment over a site to site VPN connection. What do you need to do to establish the VPN connection?
+-assign a public ip to your VPC gateway
+
+When you create new subnets within a custom VPC, by default they can communicate with each other, across availability zones.
+-true
+
+How many VPC's am I allowed in each AWS Region by default?
+-5
+You can conduct your own vulnerability scans within your own VPC without alerting AWS first?
+-false
+
+You have a VPC with both public and private subnets. You have 3 EC2 instances that have been deployed in to the public subnet and each has internet access. You deploy a 4th instance using the same AMI and this instance does not have internet access. What could be the cause of this?
+-the instance needs a public/elastic ip assigned to it
+
+What does a "domain" refer to in Amazon SWF?
+-A collection of related workflows
+
+
+Application
+-----------------
+You work for a toy company that has a busy online store. As you are approaching Christmas, you find that your store is getting more and more traffic. Your web tier is behind an Auto Scaling group, but you notice that is is frequently scaling, sometimes multiple times in an hour, only to scale back down after peak usage. You need to keep Auto Scaling from scaling up and down so rapidly. Which of the following options would help you to achieve this?
+- modify the auto scaling group cool-down timers and modify the  Cloudwatch alarsm period that triggers your auto scaling scale-down policy
+
+Which of the following is NOT a valid SNS subscribers?
+-SWF (lambda is a valid subscriber)
+
+You run a website which hosts videos and you have two types of members, premium fee paying members and free members. All videos uploaded by both your premium members and free members are processed by a fleet of EC2 instances which will poll SQS as videos are uploaded. However you need to ensure that your premium fee paying members videos have a higher priority than your free members. How do you design SQS?
+-It would be best to create two queues. the EC2's would handle the premium users Que first and if empty, move to the free que.
+
+
+---------------
+
+go over:
+long polling settings
+elastic beanstalk
+elastic map reduce -input split size, simultaneous mapper tasks
+opsworks
+storage gateway
+RRS = reduced redundancy, only 99.99%
+creating the snapshots using the command line tools
+mx records
+OLTP/OLAP
+WS trusted advisor service?
+trusted advisor service
+the different types of virtualization available on EC2

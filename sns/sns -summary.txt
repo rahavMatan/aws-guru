@@ -1,0 +1,22 @@
+sns - simple notification service. scaleable flexible and cost effective way of sending messages to useres or other apps.
+
+subscribers: push notifications ,sms, email/email-json, SQS, or any http/https endpoint.
+can also trigger lambda functions.
+
+allows to group multiple recipients using topics. topics allow recipients to subscribe dynamically.
+example group together ios, android and sms recipients to a topic. when you publish to a topic SNS will format the message accordingly.
+
+stored in multiple AZ to increase redundancy
+
+instataneous push based. (no polling)
+inexpensive, pay as you go.
+
+SNS vs SQS.
+both are messaging services.
+SNS - push, SQS- pull (poll)
+
+0.5$ per 1 million SNS requests.
+0.06$ per 100,000 notifications delievered over http
+0.75$ per 100 notifications delierirs over sms
+2$ per 100,000 over email
+

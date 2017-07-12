@@ -1,0 +1,104 @@
+global infrastructure - the physical hardware 
+region - a geo area with aws resources with 2+ a.zones
+avalability zone - datacenters spaced from one another but not dependant.
+edge location - cdn end point for cloudfront. more edgezones then regions.
+
+network and and content delivery
+vpc - virtual private cloud - virtual data center.
+route 53 - dns service
+cloudfront - 
+direct connect - connecting using a phone-line
+ec2 - elastic compute cloud
+ec2 container - a cluster of ec2
+elastic beanstock - will run code
+lambda - serverless, 
+lightsail - out of the box like wordpress sites
+
+storage 
+s3 (simple storage service) - virtual disk for objects/files. not a db.
+glacier - archive for s3.slow, but low cost.
+efs - elastic file service. shareable block based storage.
+storage gateway - connecting s3 to your datacenter
+
+databases
+rds - relatation database (sql )
+dynamodb - non relational. nosql.
+redshift - data warehousing for queries.
+elasitccache - cache frequently accesed data
+
+migrations
+snowball - send disks to aws and they load it to the cloud. a physical appliance.
+snowball edge - an 'instance' of aws datacenter on premises.
+dms - db migration sevices. 
+server migration service - migrate virtual machines
+
+analytics
+athena - sql queries on s3 files.
+emr- elastic map reduce. process big data.
+cloud search / elastic search - create a search engine
+kinesis - streaming live data on a big scale. 
+data pipeline - move data from service to service
+quick sight - visual analytics tool
+
+security and identity
+iam - identity acces managment. fundamental for signing in and permissions
+inspector -  an agent that inspects vm's
+certificate manager - ssl for dns
+directory service- a way to use active directory (microsoft) with aws
+waf - web application firewall
+artifacts - compliance documents
+
+managment tools
+cloud watch - monitor perfomance of aws environmnet
+cloud formation -  turn infrastrctur into code. a document that describes aws environment;
+cloud trail - auditing resources and changes.
+opsworks - automated diployment.
+config - auto monitor aws environment. can set alerts 
+service catalog - for big enterprises, allows ...
+trusted advisor - automated tips for optimization
+
+application services 
+step functions - visualize the app
+swf- simple work flow - coordinate between human and automated actions
+api gateway - manage api at a scale. a doorway for accesing back end services
+appstream - stream desktop apps to users
+elastic trascoder - changes video format for devices
+
+developer tools
+codecommit - github 
+codebuild - compiling code
+codedeploy - deplying to ec2 
+code pipelines - versioning 
+
+mobile services
+mobile hub - configure for mobile apps.
+cognito - sign in/up
+device farm - testing mobile apps on differnt devices
+mobile analytics
+pinpoint - understand user behaviour
+
+buisness productivity
+workdocs - store important documents
+workmail - 
+
+iot
+iot-track iot devices
+
+desktop and app straming
+workspaces - run os in the cloud instead of on the device
+appstream 2 - streaming apps to users
+
+Ai
+lex - embed alexa
+polly - text to speach
+machine learning - gets a dataset returns analized data by aws.
+rekognition - picture to tags and facial recognition
+
+messaging 
+sns - simple notification
+sqs - a que system for jobs
+ses - simple email service
+
+
+
+

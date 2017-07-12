@@ -1,0 +1,25 @@
+Kineiss - a platform to send you streaming data to. you can load and analyze streaming data. you can build you own application for your buisness needs. 
+
+streaming data- data generated continuously by thousands of data sources. usually sends the data simultaneously and in small packets (Kilibits)
+examples: game data, stock prices, social networks, geospatial (uber), iot sensors, 
+
+data producers: phones, laptops/PC, iot or EC2
+
+consumers: EC2 instances that handle the data stored on shards
+
+shards: the data capacity of the stream is the sum capacity of shards. 
+for reads- 5 transactions per second, 2mb read rate per second of data
+for writes- max 1000 records per second , up to 1mb per second
+
+----------------
+
+Services:
+Kinesis streams - stores data from producers on shards for 24hr-7days.
+producers -> streams (stored on shards) -> EC2 consumers (handle data) -> store on disk/db
+
+Kinesis Firehose - an automated service that uses Lambda instead of EC2 consumers. 
+no retention period, it's deliverd automatically when data comes in, it's optionaly handled by Lambda, and then trasnferd to S3.
+producers -> firehose (optionaly analyzed by Lambda) ->S3 ->redshift(optional)
+
+kinesis analytics - enables to run Sql queries within Streams or Firehoes and then store the data to S3/Redshit/Elasticsearch cluster
+

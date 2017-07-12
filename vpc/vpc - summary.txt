@@ -1,0 +1,115 @@
+** 1 subnet == 1 AZ.
+ACL = access control list
+SN = subnet
+IGW = internet gateway
+CIDR - classless inter-domain routing. -where we assign ip ranges
+NAT - network adress translation
+------------------
+internal ip address ranges
+(rfc 1918)
+10.0.0.0 -10.255.255.255 (10/8 prefix)
+172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
+192.168.0.0 - 192.168.255.255 (192.168 / 16 prefix)
+we will always use a /16 network adress
+--------------------
+vpc - virtual private cloud
+think of vpc as a logical data center.
+you provision a section of the aws cloud in a virtual network. you can easily cutomize your network.
+
+example - a public-facing subnet for webservers, and private-facing backend db servers with no internet connection.
+
+you can create a hardware virtual private network (VPN) between corporate datacenter and VPC to leverage aws as an extens center (hybrid cloud)
+--------------
+what can you do with a VPC?
+
+launch instances into a subnet
+assign custom IP ranges in each subnet
+configure toure tables betwen subnets
+create internet gateway. only 1 per VPC
+better security over aws resources
+security groups (are stateful - incoming rules are automatically allowed as outgoing)
+subnet ACL (not stateful. everything needs to be configured)
+------------------
+default VPC 
+defualt have a route out to the internet
+each EC2 has a public and private ip
+the only way to restore a default VPC is to contact aws.
+
+security groups , ACL , default Route table are created by default.
+subnets and IGW are not created by default.
+---------
+Peering
+connect one VPC to another using private ip addresses. (not over the internet)
+instances behave as if they are on same network.
+can also peer VPC with other AWS accounts VPC
+star configuration - 1 central VPC peers with 4 others. NO TRASITIVE PEERING == the networks are directly connected.
+example VPC-a is connected to VPC-b and VPC-c. VPC-b and VPC-c cann't talk to each other through VPC-a (transitive). they must be directly peered
+----------------
+NAT 
+NAT instances - traditional use for allowing an EC2 instance with no internet connection to have access to the internet for updates, install dbs... we use an EC2 instance from the community AMI search for NAT.
+remember to disable source/destination check on the instance.
+must be in a public subnet
+in the route table ensure there's a route out to the NAT instance. it's found in the default route table.
+the bandwidth the NAT instance supports depends on the instance type.
+to create high availability you need to use autoscaling groups, multiple subnets in different AZ and scripts to automate failover
+(lots of work..)
+need to set security group
+
+NAT gateways - easier access. preferd. scales automatically and no need to set security groups. 
+if a NAT instance goes down, so does our internet connection. but with NAT gateways aws takes care of that automatically. supports bandwidth up to 10gb
+
+---------------
+building a VPC process (not using the wizard):
+
+1. start vpc , your VPC, create VPC
+2. name, CIDR block (our ip ranges. we used 10.0.0.0/16), tenancy (shared or dedicated hardware).
+3. default route table, ACL, security groups are created
+4. subnets-> create -> name, vpc (select the newly created one), AZ , CIDR (we used 10.0.1.0/24 which will give us 10.0.1.xxx)
+5. create anoter subnet ->name , vpc (same as above), AZ(different then above), CIDR (10.0.2.0/24)
+6. internet gateways ->create ->name
+7. attach to vpc (select newly created vpc)
+8. route tables -> (main route table is private by default)
+9. create new table -> name, vpc
+10. edit -> add route that is open to the internet
+11. subnet associations -> edit -> select a subnet that will be the public one
+12. subnets -> selected the public one -> actions -> modify autoassign public ip.
+13. deploy 2 EC2 instances. one is a public web server (can use a script). one is a private sql server. (notice for the auto-assign public ip..). for the private instace, set a new security group with ssh-10.0.1.0/24, mysql/aurora-10.0.1.0/24
+14. for the mysqlserver add another rule for all ICMP with same ip address - this allows ping.
+15. copy the content of the privateKey.pem file.
+16. ssh into the web server -> create (echo or nano) new privateKey.pem file and paste the content.
+17. chmod 0600 the privteKey.pem file (gives read and write privileges to that file).
+18. ssh into sql server using the newly created file.
+19. (NAT instace) launch an EC2 instance -> community -> search for nat
+20. deploy into our VPC, and put into the public subnet.
+21. use a public facing security group
+22. actions -> networking -> change source/destination check->disable
+23. VPC->route tables -> select the main route (nameless) -> add 0.0.0.0/0 target- our newly created EC2
+ (?? associate public subnet )
+24. (NAT gateway - replaces steps 19-23) VPC -> NAT gateways -> create -> subnet(public facing), elastic ip(create new EIP)
+25. route tables -> main route table ->add 0.0.0.0/0 target - the newly created gateway.
+
+--------------
+security groups vs NACL:
+
+security group acts as the first layer of defence. operates at the instance level. stateful
+N(network)ACL operates at the subnet level. stateless. denies all traffic by default
+
+a subnet can only be assiciated with one NACL. but an NACL can be assiciated with many subnets.
+if you try to add a ACL to a subnet the is already associated with an ACL, the new ACL will just replace the old one.
+
+rules are evalutaed in numerical order.
+the lowest number rules have precedens over later rules.
+example:
+rule 99 blocks my ip
+rull 100 allows all ips
+==my ip is still blocked.
+
+you can't block using a security group
+---------------------------------------------
+notes:
+when setting up an ELB, to get good availability you need  at least two AZ or subnets. So notice if your VPC actually has more then 1 public subnet
+
+Bastion - used to securly administer EC2 instances in private subnets (using ssh or RDP-remote desktop protocal). used instaed of NAT. 
+for our purposes, we used the nat-EC2 as a Bastion
+
+Flow logs - enable you to capture IP traffic flow information for the network interfaces in your resources and log them in cloudWatch. 

@@ -1,0 +1,20 @@
+SOTRAGE GATEWAY is a software appliance that is available for dowload as a VM image that you install on a host in your datacenter. once intalled and associated with an AWS account you can create either gateway-chached  ot gateway stored volumes that can be mounted on your on premise applications.
+
+gateway chached volumes - use S3 for your primary data while retaining small portions of it locally in your cache for frequent accesss. this minimizes the need to scale theon premis storage while still providing low latency. 
+volumes can be up to 32 tb , and you can mount them as isacsi devices from your on-premis serves.
+this is stored on S3, and recently read data is stored localy.
+
+
+gateway stored - data is stored locally while being backed up to AWS. provides low layency  and durability.
+stored in AWS as EBS snapshots
+
+pricing: pay for what you use.
+gateway usage par month, snapshots storage per gbper month , volume storage usage per gb per month, data trasfer out per gb per month
+
+file gateway - for flat files, stores directly on S3
+
+volume gateway - block based storage. for os and db.
+	1. stored volumes - the data is stored on premise, and backed to S3.
+	2. chaced volumes - the data is stored on S3, and most requently accessed data is chached 	 	   locally .
+
+gateway virtual tape laibrary - used for backup and uses popular backup apllications like netbackup, veam..

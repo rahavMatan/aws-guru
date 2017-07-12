@@ -1,0 +1,14 @@
+API gateway - publish, maintain, monitor and sucure API's. creates a 'front door' for apps to access data, logic, or functionality from back end services. 
+
+caching - you can cache your endpoint response thus reducing the number of calls and impove latency. cached responses have a TTL in seconds.
+
+low cost and efficient. 
+scales automatically.
+
+in case of a heavy load on the api gateway ( could be beacuse of an attack  ) you can throttle requests.
+throttle - reject or handle the request differently. 
+
+you can connect api gateway to cloudwatch .
+
+can enable Same origin policiy and CORS (cross origin resource sharing)
+

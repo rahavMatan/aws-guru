@@ -1,0 +1,33 @@
+cloud benefits:
+almost zero upfront infrastrcture invesment
+just in time infrastructure - provisioning quickly and when in demnad
+efficient resource utilizition
+usage based costing (no per year contracsts)
+reduced time to market
+
+technical benefits:
+automation (scriptable infrastructur)
+auto scaling / proactive scaling
+efficient development lifecycle
+improved testability (seperate envs)
+recovery and continuity
+overflow to the cloud - intergrate with on-premis
+
+elasticity
+allows auto scaling compared to traditional scaling.
+implment using:
+proactive cyclic scaling- happens at fixed intervals 
+proactive events based scaling: sacle when expecting a surge of traffic.
+auto scaling based on demnad. using monitoring serivce send triggers to sacale up or down based no metrics (network IO or instance CPU)
+
+design for failure : be pessimist when designing. think about recovery startegies.
+
+decouple components (hint for SQS)
+don't have tight dependancies so if a component is down, the others will continue to work. the interaction is asynchronous
+
+
+secure your app: example
+ open http/s only on the web server
+open ssh only on app server
+only db access EBS
+block all other traffic

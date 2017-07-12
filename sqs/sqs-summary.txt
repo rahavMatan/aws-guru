@@ -1,0 +1,23 @@
+first ever aws service (simple que service).
+
+a que is a temporary repository for messages that are awaiting processing.
+
+always a pull base system. not a push base system.
+
+allows to decouple to components of the app so they can run independently.
+
+messages are up to 256kb of text.
+
+messages can be kept in a que for 1 min to 14 days. defualt is 4 days
+you can build autoscaling according to the number of jobs in the que
+
+visibilty time out - when a message is picked up by a reader it is still in the que in invisible mode for a period called visibilty time out. if the msg is procssed within that time period it is deleted. if it is not procesesd within that period it comes visible again. this can result in a msg being processed twice.
+max 12 hours.
+
+long polling - instead of poling constantly, the poll is sent, and is only returned when a new job entred the que. could save money
+
+------------
+types of ques:
+standard - default type. no ordering. can't be guaranteed to send in the order which they came in
+
+fifo - first in first out. sent and recievd in order.

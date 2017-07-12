@@ -1,0 +1,145 @@
+** 
+volume == hard disk
+security groups == virtual firewalls
+--------------------------
+EC2 instances types:
+'Dr mc gift pix'
+D-desnsity
+R-ram
+m-main choice (general)
+c-compute
+g-graphics
+i-iops
+f-fpga (field-programmable gate array)
+t--cheap (t2 micro)
+p-graphics(pics)
+x-extreme
+--------------------------
+
+termination protection-off by default.
+EBS will be deleted when EC2 instance is terminated by default.
+EBS root volume of default AMI cann't be encrypted. but third party tools can be used to encrypt, or by making an image copy of the instance.
+additinal volumes can be encrypted
+-------------------
+
+EBS: the block storage assiciated with an EC2 instance
+
+pricing models:
+-on demand
+-spot
+-reserved
+-dedicated host
+
+instances are charged by the hour-rounded up. unless aws terminated the instance, then it is rounded down.
+
+ebs consists:
+ ssd, general purpose - GP2 - (up to 10,000 iops)
+ ssd, provisioned iops - IO1 - more then 10,000 iops
+ hdd, thouroughput optimized ST1 - frequently accessed workloads
+ hdd, cold SC1 - less frequenly accessed data
+ hdd, magnectic - standard - cheap less frequenly accessed data
+
+*can't connect more then 1 EC2 instance to 1 EBS. use EFS for that
+
+----------------
+instance termination protection is turned off by default.
+the root(where OS is installed) EBS is deleted when the EC2 instance is terminated by default.
+root volumes can't be encrypted unless using third party tools, but ither EBS volumes can be.
+----------------
+volumes exist on EBS - they are virtual hard disk.
+snapshots (point in time copies of volumes) exits on S3.
+taking a snapshot of a volume will store that volume on S3.
+snapshots are incremental - only data that changed since the last snapshot are moved to S3
+snapshots are encrypted automatically
+volumes restored from snapshots are ecnrypted automatically
+you can share snapshot, but only if they are un-encrypted.
+you should stop the instance bofore taking a snapshot of a root volume
+------------------
+security rules:
+all inbound traffic is blocked by defualt
+all outbound traffic is allowed by default
+can have any numbr or instances within a security group
+can have multiple security groups attached to EC2 instances
+there are no 'deny' rules. on allow
+security groups are stateful - if you allow a rule for traffic in, that traffic is also allowed out. (access lists are not)
+you can't block specific ip adresses from security groups.
+
+---------------------
+roles: are more secure then storing the access and secret keys on EC2. easier to manage.
+can be assigned to instaces after they are provisions
+roles can be updated during usage.
+----------------------
+raid = redundant aray of indipendent disks. acting as one disk to the OS.
+raid 0 - good perfoamce. no data redundancy
+raid 1 - mirrored, data redundancy
+raid 5 - aws doesn't recommend this for EBS. good for reads, bad for writes
+raid 10 - good redundancy and performance.
+
+to increase IO - increase disk volumes as a raid
+-----------------
+taking a snapshot of a Raid array: (application consistent snapshot)
+stop application from writing to disk by freezing the file system / unmount the raid array / shut down the EC2 instance
+flush all caches to the disk
+--------------------
+when taking a snapshot of a volume, the snapshot is encrypted by default
+volumes restored from encrypted snapshots are also encrypted
+can't share encrypted snapshots.
+------------------------
+AMI - amazon machine image.
+AMI's are available on the store.
+AMis are regional - can only be launched from the region it is stored in. but you can copy AMIs to other region. using the cli api or console.
+-------------------
+AMI type: EBS backed and Instance Store backed (also called ephemeral).
+Instance Stores can't attach additional Instnce Store Volumes after launching. 
+EBS can be stopped and re-run on a different hypervisor in case of a problem. Instance Store can't.
+Instance Stores are less durable, if their host fails - the instance is lost. (ephemeral)
+EBS are created from a snapshot. Instance Store are created from a template stored on S3
+both can be rebooted without losing data
+-------------
+elastic load balancer
+classic / application
+*a subnet == avalability zone
+has healthchecks
+no ip adress. only dns names.
+----------------------
+cloudwatch
+standart monitoring - 5 mins, detaild monitoring - 1 min
+create dashboard, alarms, events, logs
+cloud watch is for logginng , monitoring. cloud trail is for auditing an entire aws env/ accounts.
+-----------------------
+credentials are normally stored on an instance under the .aws folder. this is a security breach..
+roles allow instances not to have the credentials written to a file on the instance. therfore safer
+roles are global. not by zone
+
+---------------------------------
+bash script example: 
+#!/bin/bash
+yum update -y
+yum install httpd -y
+service httpd start
+chkconfig httpd on
+aws s3 cp s3://mywebsitebucket-acg2/index.html /var/www/html
+
+----------------
+metadata:
+curl http://169.254.169.254/latest/meta-data/
+
+---------------------------
+Autoscaling  groups require launch configuration before launching.
+--------------
+placement group - grouping of instances within a single availability zone. used for low network latency and high performace.
+only certain types of instances can be part of  a placemnet group.
+recommended to use homogenous instaces types (same size and family)
+can't merge groups.
+can't move existing instincaes into an existing group.
+------------------------
+efs - elastic file system.
+pay for the storge you use.
+allows to use a single storage across multiple ec2 instances. could use as a central file storage.
+data is stored across multiple AZ
+read after write consistency
+*not available in all zones yet
+----------------------
+lambda - no servers, auto scaling, very cheap
+-------------
+summary

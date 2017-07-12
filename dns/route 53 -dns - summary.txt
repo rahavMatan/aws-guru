@@ -1,0 +1,36 @@
+DNS (domain name system) - is used to convert domain names to internet protocol adress (ip).
+
+ip6 is newer to ip4, and uses 128 bit adress instead of 32 bits.
+the internet assigend numbers authority (iana) controlls the top level domain name (.com,.gov .co.uk .. )
+
+domain registrars - authority for registering domain names.
+
+Start of Authority (SOA) records - holds information about:
+name of the server that supplied the data for the zone, the admin of the zone, the current version of the data file,  TTL for records.
+
+NS (namer server) records - which name servers are in charge of the zone / domain
+
+A (adress) records - the A records is used by a computer to translate the domain name to IP adress.
+
+TTL (time to live) record - how long the name/ip adress is cached for in the browser / server
+
+CNAMES - canonical name. can used for a domain to point to another. mobile.acg.com -> acg.com
+
+Alias Records - used by aws like Cnames. but also can be used for 'naked domains names' http://acg.com
+using an Alias is free, but CNAME is not.
+**Alias is prefferd.
+------------------------
+
+ELBs dont have an ipv4 adress, you resolve to them using a DNS name.
+
+-----------------
+Route 53 policies:
+simple - default, one server per on website
+
+weighted - send a percentage of requests between 2 specified resources. can be used for A/B testing different versions of a website. or manual load balancing.
+
+latency - base the routing on the lowest network latency. (which region will give the fastset response)
+
+failover - used for an active/passive setup. if the primary server fails a health check, then the request is redirected to the secondary location
+
+geolocation - route traffic depending on the location of the users.
