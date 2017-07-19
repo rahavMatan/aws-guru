@@ -1,0 +1,92 @@
+terminal syntax: <username>@<host or computer name> : ~ == your directory
+
+-pwd: print working directory. what dir I'm in
+
+-cat : read a file
+-ls: list of folder content. -l adds info about content. -a shows also hidden, or .(dot)files. can be used together: ls -la
+
+dot files are hidden for a reason. 
+
+-clear: clear screen.
+
+cd: change directory , or move back to /home
+
+.. : move up one dir
+
+mkdir: make direcrory <name>
+
+rmdir: remove directory
+
+touch: create a file if it doesn't exist.
+rm <name>: remove a file
+
+cp <filename> <copyname>: copy a  file
+
+mv <file><path/newfilename>: move a file or rename a file. (it deletes the origianl)
+
+
+grep: pattern match.<searchparam> <filename>: displays the line where the word was found in the file.
+
+diff <file1><file2>: print the lines that are different.
+
+passwd : change your current user password
+
+echo: display on the screen.
+
+creating variables: <varname> = <value>.
+
+echo $<varname>
+
+info <command-name> : info about the command
+
+saving results to a file: <command> > <filename>. overwrites existing content on file.
+
+<command> >> <filename>. appends the results instead of overwrite
+
+------------------------------
+
+permissions: 
+- : file
+d : directory
+r/w/x : read, write, execute
+the three rwx groups: 
+-the first is the permissoins of the OWNER of the file.
+-the second is for the GROUP
+-the third is for EVERYONE ELSE (global users).
+
+permission groups: u-user, g-groups, o-outsideworld.
+
+chmod <permmison group><add or remove +/-><permission name>:change permmisons on a file
+
+shortcuts:
+chmod <code>
+
+7 - 1+2+4 (permissions)
+6 - 4+2 (permissons)
+5 - 4+1
+4 - read
+2 - write
+1 - execute
+0 - no permmissions
+
+example: chmod 754 <filename> == user gets all prevliges, group get read and execute prevliges, others get read permissions.
+
+---------------------
+
+checksum : sha1sum <filename>. gives back a hash representing the file. 
+
+------------------
+** the '\' represents that the space should not be considered a seperation between COMMANDS. example: a file name called 'grocery list'. to acccess that file from the terminal : 'grocery\ list'
+
+-------------
+tar and gz files
+gzip grocery\ list : will zip the file 
+gunzip filename.gz : unzip
+
+tar cvf <filename>.tar <file or files>: 
+c: create or compress,
+v: display in terminal
+f: file options with params.
+
+tar xvf 
+x: extract

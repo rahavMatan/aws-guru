@@ -1,0 +1,55 @@
+When you create new subnets within a custom VPC, by default they can communicate with each other, across availability zones.
+-true
+
+It is possible to transfer a reserved instance from one Availability Zone to another.
+-true
+
+You work for a automotive company which is migrating their production environment in to AWS. The company has 4 separate segments, Dev, Test, UAT & Production. They require each segment to be logically isolated from each other. What VPC configuration should you recommend?
+-A seperate VPC for each segment creates isolation. creating different subnets still allows comunication.
+
+You are putting together a wordpress site for a local charity and you are using a combination of Route53, Elastic Load Balancers, EC2 & RDS. You launch your EC2 instance, download wordpress and setup the configuration files connection string so that it can communicate to RDS. When you browse to your URL however, nothing happens. Which of the following could NOT be the cause of this.
+-you have locked port 22 to your specific IP, and not open to 0.0.0.0./0
+
+You are a Solutions Architect working for a major European oil company. You are designing a new web application which will need to access data stored in DynamoDB. You need to do this as securely as possible, without storing any credentials on a long term basis. How would you achieve this?
+-use AWS IAM ROLES for the EC2 instances that make the API call
+
+Amazon SQS keeps track of all tasks and events in an application.
+-false. that fits SWF
+
+How is the Public IP address managed in an instance session via the instance GUI/RDP or Terminal/SSH session?
+-the public IP is not managed on the instance. it is an alias applied as a NAT of the PRIVATE IP.
+
+You have been engaged by a company to design and lead a migration to an AWS environment. The team is concerned about the capabilities of the new environment, especially when it comes to avoiding bottlenecks. The design calls for about 20 instances (C3.2xLarge) pulling jobs/messages from SQS. Network traffic per instance is estimated to be around 500 Mbps at the beginning and end of each job. Which network configuration should you plan on deploying?
+-spread the instances across AZ's. -NOT deploy to placment group.
+
+
+You work for a famous bakery who are deploying a hybrid cloud approach. Their legacy IBM AS400 servers will remain on premise within their own datacenter however they will need to be able to communicate to the AWS environment over a site to site VPN connection. What do you need to do to establish the VPN connection?
+-assign a public IP to your VPC gateway
+-WRONG!:Connect to the environment using AWS Direct Connect.
+
+In RDS when using multiple availability zones, can you use the secondary database as an independent read node?
+-No
+
+Automated backups are enabled by default for a new DB Instance?
+-true
+
+Can I move a reserved instance from one region to another?
+-no
+
+Can I "force" a failover for any RDS instance that has Multi-AZ configured?
+-yes
+
+Which of the following is not supported by AWS Import/Export?
+-export to glacier
+
+Which of the following is not a service of the security category of the AWS trusted advisor service?
+-vulnerability scans on existing VPCs
+
+-- static webpages hosted on S3 will appear as: https://<bucketname>.s3-sebsite-<AZ>.amazonaws.com
+
+---AWS does not copy launch permissions, user-defined tags, or Amazon S3 bucket permissions from the source AMI to the new AMI.--
+--There is a soft limit of 20 EC2 instances per region.
+ but can request for more---
+
+--By default EBS volumes are set to 'Delete on Termination', meaning they persist only if instructed.---
+

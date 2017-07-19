@@ -41,9 +41,10 @@ subnets and IGW are not created by default.
 Peering
 connect one VPC to another using private ip addresses. (not over the internet)
 instances behave as if they are on same network.
-can also peer VPC with other AWS accounts VPC
-star configuration - 1 central VPC peers with 4 others. NO TRASITIVE PEERING == the networks are directly connected.
-example VPC-a is connected to VPC-b and VPC-c. VPC-b and VPC-c cann't talk to each other through VPC-a (transitive). they must be directly peered
+can also peer VPC with other AWS accounts VPC withing a SINGLE REGION
+star configuration - 1 central VPC peers with 4 others. NO TRASITIVE PEERING == the networks must be directly connected.
+example VPC-a is connected to VPC-b and VPC-c. VPC-b and VPC-c cann't talk to each other through VPC-a (transitive). they must be directly peered. 
+CIDR blocks for the private IP's must be different between peering VPCs - VPC A 10.0.0.0/16 cant peer to VPC B if it has 10.0.0.0/24
 ----------------
 NAT 
 NAT instances - traditional use for allowing an EC2 instance with no internet connection to have access to the internet for updates, install dbs... we use an EC2 instance from the community AMI search for NAT.

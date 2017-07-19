@@ -1,0 +1,20 @@
+in linux AMI:
+(do a yum update)
+1. follow the official jenkins installation steps. install LTS or current version.
+2. update to java 8
+3. add port 80 and 8080 to ip tables - https://wiki.jenkins.io/display/JENKINS/Running+Jenkins+on+Port+80+or+443+using+iptables
+4. if asked for an intial password for first login go to : var/lib/jenkins/secrets and then cat initialAdminPassword. this should print the initial password.
+5. pay attention to the messages that follow
+6. if you don't know the username and password try this: https://gist.github.com/gmhawash/4043232 OR use the same password from before
+
+7. to set up a project with node : https://codeforgeek.com/2016/04/continuous-integration-deployment-jenkins-node-js/
+
+8. if the git repo is not recognized by jenkins in the 'new item' step - https://stackoverflow.com/questions/12681308/failed-to-connect-to-repository-error-while-setting-up-github-jenkins-plugin
+
+9. select GitHub hook trigger for GITScm polling if 'Build when a change is pushed to GitHub' option is not available
+
+10. if clicking 'execute shell' doesn't do anything, try saving and refreshing the page
+
+
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDdKW1l36LnrZk9CUBZP3AE/BkM+nkMY1IfVWWLt3i8srj71At+wkh2aChITqnlBW/5b0cUrC2JZhw5Yft9yhYRCd8aHOTLd0V+Hny8l1YM42zniBydszvxg+VCB9fjZFlnDlVKb0amnkZWjuPUBv7MCPt4ePOYk5z4Sn9crC/Hs5erRGzIj3GvBI8L/0BznpH7D/Xs1wHOuYoezKM5bdw6vYyz5KY9SDR50csAsZnKNtclATUtpVketRThX4vNVUTOWgZZb9Jq0GS5OBvVGUIg1oqtKvACutPEd7n7pI5FavKxmd7n2l8v4gEqYDl9Jl0d1Ht2lfhuqcGf5tr0R2gP jenkins@ip-172-31-12-188

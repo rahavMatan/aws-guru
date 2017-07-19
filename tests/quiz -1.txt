@@ -46,7 +46,7 @@ A __________ is a document that provides a formal statement of one or more permi
 -policy
 
 Power User Access allows ________.
--Access to all AWS services except for managment except for managment of groups and users within IAM
+-Access to all AWS services except for managment  for groups and users within IAM
 
 You are a solutions architect working for a large engineering company who are moving their existing legacy hardware to AWS. You have configured their first AWS account and you have set up IAM. Your company will be primarily based out of West Germany, however they will have a small subsidiary operating out of South Korea and you will need an AWS environment configured there as well. Which of the following statements is true;
 -users and policy documents are applied globaly
